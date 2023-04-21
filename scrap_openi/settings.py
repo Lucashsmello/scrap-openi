@@ -12,17 +12,17 @@ NEWSPIDER_MODULE = "scrap_openi.spiders"
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 
-LOG_LEVEL = 'WARNING'
+LOG_LEVEL = 'INFO'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 64
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 0
 # The download delay setting will honor only one of:
-#CONCURRENT_REQUESTS_PER_DOMAIN = 16
+CONCURRENT_REQUESTS_PER_DOMAIN = 64
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
@@ -31,23 +31,6 @@ LOG_LEVEL = 'WARNING'
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
 
-# Override the default request headers:
-# DEFAULT_REQUEST_HEADERS = {
-#    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-#    "Accept-Language": "en",
-# }
-
-# Enable or disable spider middlewares
-# See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-# SPIDER_MIDDLEWARES = {
-#    "scrap_openi.middlewares.ScrapOpeniSpiderMiddleware": 543,
-# }
-
-# Enable or disable downloader middlewares
-# See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-# DOWNLOADER_MIDDLEWARES = {
-#    "scrap_openi.middlewares.ScrapOpeniDownloaderMiddleware": 543,
-# }
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -61,18 +44,6 @@ ITEM_PIPELINES = {
     'scrap_openi.pipelines.MyImagesPipeline': 1,
 }
 
-# Enable and configure the AutoThrottle extension (disabled by default)
-# See https://docs.scrapy.org/en/latest/topics/autothrottle.html
-#AUTOTHROTTLE_ENABLED = True
-# The initial download delay
-#AUTOTHROTTLE_START_DELAY = 5
-# The maximum download delay to be set in case of high latencies
-#AUTOTHROTTLE_MAX_DELAY = 60
-# The average number of requests Scrapy should be sending in parallel to
-# each remote server
-#AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
-# Enable showing throttling stats for every response received:
-#AUTOTHROTTLE_DEBUG = False
 
 # Enable and configure HTTP caching (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
@@ -97,3 +68,16 @@ FEEDS = {
 }
 
 IMAGES_STORE = 'extracted_dataset/images/'
+
+
+### Custom Settings used inside the spiders ###
+
+CASESPIDER_MIN_INDEX = 1
+CASESPIDER_MAX_INDEX = 121 # default is all images.
+
+# See https://openi.nlm.nih.gov/services?it=xg#searchAPIUsingGET
+# Image type: Exclude Graphics [xg], Exclude Multipanel [xm], X-ray [x], Ultrasound [u], Photographs [ph], PET [p], Microscopy [mc], MRI [m], Graphics [g], CT Scan [c],
+CASESPIDER_API_GET_PARAMS = {
+    'it': ['x', 'xg', 'xm'],  # Image Type
+    'vid': '0'
+}

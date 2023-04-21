@@ -15,16 +15,17 @@ class ImageItem:
     Problems: str
     imgLarge: str
     detailedQueryURL: str
-    ccLicense: str
     licenseType: str
     image_id: str
     image_caption: str
     image_modalityMajor: str
     image_mention: str
     image_urls: list[str]  # Special attribute that scrapy looks at in order to automatically download images.
+    metainfo_api_params: dict
     image_captionConcepts: list[str] = None
     image_modalityMinor: str = None
     pmid: str = None
+    ccLicense: str = None
     ### medpix specific attributes ###
     medpixFigureId: str = None
     medpixArticleId: str = None
