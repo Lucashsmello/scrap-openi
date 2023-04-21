@@ -78,6 +78,6 @@ CASESPIDER_MAX_INDEX = 121 # default is all images.
 # See https://openi.nlm.nih.gov/services?it=xg#searchAPIUsingGET
 # Image type: Exclude Graphics [xg], Exclude Multipanel [xm], X-ray [x], Ultrasound [u], Photographs [ph], PET [p], Microscopy [mc], MRI [m], Graphics [g], CT Scan [c],
 CASESPIDER_API_GET_PARAMS = {
-    'it': ['x', 'xg', 'xm'],  # Image Type
+    'it': 'x,xg,xm',  # Image Type
     'vid': '0'
 }
