@@ -73,11 +73,11 @@ IMAGES_STORE = 'extracted_dataset/images/'
 ### Custom Settings used inside the spiders ###
 
 CASESPIDER_MIN_INDEX = 1
-CASESPIDER_MAX_INDEX = 121 # default is all images.
+# CASESPIDER_MAX_INDEX = 121 # default is all images.
 
 # See https://openi.nlm.nih.gov/services?it=xg#searchAPIUsingGET
 # Image type: Exclude Graphics [xg], Exclude Multipanel [xm], X-ray [x], Ultrasound [u], Photographs [ph], PET [p], Microscopy [mc], MRI [m], Graphics [g], CT Scan [c],
 CASESPIDER_API_GET_PARAMS = {
-    'it': 'x,xg,xm',  # Image Type
+    'it': 'x,xg',  # Image Type
     'vid': '0'
 }

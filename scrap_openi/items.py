@@ -6,7 +6,6 @@ class ImageItem:
     case_uid: str
     case_pmcid: str
     docSource: str  # 'MPX' or 'PMC'
-    articleType: str
     title: str
     journal_title: str
     affiliate: str
@@ -19,6 +18,10 @@ class ImageItem:
     image_mention: str
     image_urls: list[str]  # Special attribute that scrapy looks at in order to automatically download images.
     metainfo_api_params: dict
+    MeSH_minor: list[str]
+    MeSH_major: list[str]
+    abstract: str = None
+    articleType: str = None
     journal_abbr: str = None
     journal_date: dict = None
     image_captionConcepts: list[str] = None

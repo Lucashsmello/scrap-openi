@@ -55,15 +55,22 @@ class CaseSpider(scrapy.Spider):
     def parse_detailed_case(self, response: http.TextResponse):
         rjson = response.json()['list'][0]
 
+        # Only fields that are mapped in ImageItem Object
         case_params = {k: v for k, v in rjson.items() if k in ImageItem.__annotations__.keys()}
         case_params['case_uid'] = rjson['uid']
         case_params['case_pmcid'] = rjson['pmcid']
 
         extra_image_data = {f'image_{k}': v for k, v in rjson['image'].items()}
+        extra_image_data = {k: v for k, v in extra_image_data.items() if k in ImageItem.__annotations__.keys()}
+
+        mesh_data = {'MeSH_minor': rjson['MeSH']['minor'],
+                     'MeSH_major': rjson['MeSH']['major']
+                     }
 
         image_urls = [response.urljoin(case_params['imgLarge'])]
 
         yield ImageItem(image_urls=image_urls,
                         metainfo_api_params=self.settings.getdict('CASESPIDER_API_GET_PARAMS'),
+                        **mesh_data,
                         **extra_image_data,
                         **case_params)

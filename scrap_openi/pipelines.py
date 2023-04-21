@@ -7,5 +7,6 @@ LOGGER = logging.getLogger(__name__)
 
 class MyImagesPipeline(ImagesPipeline):
     def file_path(self, request, response=None, info=None, *, item: ImageItem = None):
-        image_filename = f'{item.case_uid}/{item.image_id}'
+        image_filename = f'{item.case_uid}/{item.imgLarge.split("/")[-1]}'
+
         return image_filename
